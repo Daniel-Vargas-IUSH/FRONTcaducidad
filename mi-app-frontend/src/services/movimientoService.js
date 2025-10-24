@@ -1,0 +1,27 @@
+// src/services/movimientoService.js
+import api from './api';
+
+export const getMovimientos = async () => {
+  const response = await api.get('/movimientos');
+  return response.data;
+};
+
+export const getMovimientoById = async (id) => {
+  const response = await api.get(`/movimientos/${id}`);
+  return response.data;
+};
+
+export const createMovimiento = async (movimientoData) => {
+  const response = await api.post('/movimientos', movimientoData);
+  return response.data;
+};
+
+export const updateMovimiento = async (id, movimientoData) => {
+  const response = await api.put(`/movimientos/${id}`, movimientoData);
+  return response.data;
+};
+
+export const deleteMovimiento = async (id) => {
+  const response = await api.delete(`/movimientos/${id}`);
+  return response.data;
+};
