@@ -51,18 +51,21 @@ const MovimientosListPage = () => {
       ) : (
         <ul className="list-items">
           {movimientos.map((movimiento) => (
-            <li key={movimiento._id} className="list-item-card">
-              <h3>Tipo: {movimiento.tipo}</h3>
-              <p>Cantidad: {movimiento.cantidad}</p>
-              <p>Producto ID: {movimiento.producto}</p>
-              <p>Usuario ID: {movimiento.usuario}</p>
-              <p>Fecha: {new Date(movimiento.fecha).toLocaleDateString()}</p>
-              <div className="item-actions">
-                <Link to={`/movimientos/edit/${movimiento._id}`}>
-                  <Button variant="secondary">Editar</Button>
-                </Link>
-                <Button variant="danger" onClick={() => handleDelete(movimiento._id)}>
-                  Eliminar
+            // 🚨 CORRECCIÓN 1: Usar id_movimiento si ese es el nombre del ID en la DB
+            <li key={movimiento.id_movimiento || movimiento.id} className="list-item-card">
+              <h3>Tipo: {movimiento.tipo}</h3>
+              <p>Cantidad: {movimiento.cantidad}</p>
+              {/* 🚨 CORRECCIÓN 2: Usar los nombres de campo de la DB */}
+              <p>Producto ID: {movimiento.id_producto}</p> 
+              <p>Usuario ID: {movimiento.id_usuario}</p> 
+              <p>Fecha: {new Date(movimiento.fecha_movimiento || movimiento.fecha).toLocaleDateString()}</p>
+              <div className="item-actions">
+                {/* 🚨 CORRECCIÓN 3: Usar el ID correcto para Editar y Eliminar */}
+                <Link to={`/movimientos/edit/${movimiento.id_movimiento || movimiento.id}`}>
+                  <Button variant="secondary">Editar</Button>
+                </Link>
+                <Button variant="danger" onClick={() => handleDelete(movimiento.id_movimiento || movimiento.id)}>
+                  Eliminar
                 </Button>
               </div>
             </li>

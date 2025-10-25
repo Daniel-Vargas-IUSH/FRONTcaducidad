@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 import './AuthPage.css'; // Crea un archivo CSS para estilos de auth
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email('Email inválido').required('El email es requerido'),
-  password: Yup.string().required('La contraseña es requerida'),
+  usuario_login: Yup.string().required('El usuario es requerido'),
+  contrasena: Yup.string().required('La contraseña es requerida'),
 });
 
 const LoginPage = () => {
@@ -33,27 +33,27 @@ const LoginPage = () => {
       <div className="auth-card">
         <h2>Iniciar Sesión</h2>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ usuario_login: '', contrasena: '' }}
           validationSchema={LoginSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, handleChange, values, errors, touched }) => (
             <Form>
               <InputField
-                label="Email"
-                type="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                error={touched.email && errors.email}
+                label="Usuario o Email" 
+                type="text"
+                name="usuario_login" // Campo de la DB
+                value={values.usuario_login}
+                onChange={handleChange}
+                error={touched.usuario_login && errors.usuario_login}
               />
               <InputField
                 label="Contraseña"
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                error={touched.password && errors.password}
+                type="password"
+                name="contrasena" // Campo de la DB
+                value={values.contrasena}
+                onChange={handleChange}
+                error={touched.contrasena && errors.contrasena}
               />
               {error && <div className="auth-error-message">{error}</div>}
               <Button type="submit" disabled={isSubmitting}>
