@@ -9,8 +9,10 @@ import { Link } from 'react-router-dom';
 import './AuthPage.css';
 
 const RegisterSchema = Yup.object().shape({
+  // El backend requiere 'nombre' (Nombre Completo)
+  nombre: Yup.string().required('El nombre completo es requerido'),
   username: Yup.string().required('El nombre de usuario es requerido'),
-  email: Yup.string().email('Email inválido').required('El email es requerido'),
+  
   password: Yup.string()
     .min(6, 'La contraseña debe tener al menos 6 caracteres')
     .required('La contraseña es requerida'),
@@ -28,7 +30,7 @@ const RegisterPage = () => {
     setError(null);
     setSuccess(false);
     try {
-      await register({ username: values.username, email: values.email, password: values.password });
+      await register({ nombre: values.nombre, usuario_login: values.username, contrasena: values.password });
       setSuccess(true);
       resetForm(); // Limpia el formulario al éxito
     } catch (err) {
@@ -43,27 +45,27 @@ const RegisterPage = () => {
       <div className="auth-card">
         <h2>Registro</h2>
         <Formik
-          initialValues={{ username: '', email: '', password: '', confirmPassword: '' }}
+          initialValues={{ nombre: '', username: '', password: '', confirmPassword: '' }}
           validationSchema={RegisterSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, handleChange, values, errors, touched }) => (
             <Form>
               <InputField
-                label="Nombre de Usuario"
+                label="Nombre de Completo"
                 type="text"
-                name="username"
-                value={values.username}
+                name="nombre"
+                value={values.nombre}
                 onChange={handleChange}
-                error={touched.username && errors.username}
+                error={touched.nombre && errors.nombre}
               />
               <InputField
-                label="Email"
-                type="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                error={touched.email && errors.email}
+                label="Nombre de Usuario"
+                type="text"
+                name="username"
+                value={values.username}
+                onChange={handleChange}
+                error={touched.username && errors.username}
               />
               <InputField
                 label="Contraseña"

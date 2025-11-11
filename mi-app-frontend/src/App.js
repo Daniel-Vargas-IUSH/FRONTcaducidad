@@ -10,7 +10,7 @@ import ProductosListPage from './pages/Productos/ProductosListPage';
 import MovimientosListPage from './pages/Movimientos/MovimientosListPage';
 // 1. IMPORTA EL COMPONENTE DE FORMULARIO DE PRODUCTO
 import ProductoFormPage from './pages/Productos/ProductoFormPage'; 
-// import MovimientoFormPage from './pages/Movimientos/MovimientoFormPage';
+import MovimientoFormPage from './pages/Movimientos/MovimientosFormPage'; // Importar
 import NotFoundPage from './pages/NotFoundPage'; // Crea esta página
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import './styles/global.css'; // Estilos globales
@@ -77,7 +77,7 @@ function App() {
                 }
               />
                {/* Rutas de movimientos (dejadas comentadas, asumiendo que las harás después) */}
-              {/* <Route
+              <Route
                 path="/movimientos/new"
                 element={
                   <PrivateRoute>
@@ -92,7 +92,7 @@ function App() {
                     <MovimientoFormPage />
                   </PrivateRoute>
                 }
-              /> */}
+              /> 
 
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
