@@ -9,9 +9,9 @@ const HomePage = () => {
   return (
     <div className="home-container">
       <div className="home-content">
-        <h1>Bienvenido a Mi Aplicación</h1>
+        <h1>Bienvenido a K-DUCANDO</h1>
         {user ? (
-          <p>¡Hola, {user.username || 'usuario'}! Explora tus productos y movimientos.</p>
+          <p>¡Hola, {user.nombre || 'usuario'}! Explora tus productos y movimientos.</p>
         ) : (
           <p>Por favor, inicia sesión o regístrate para acceder a todas las funcionalidades.</p>
         )}
