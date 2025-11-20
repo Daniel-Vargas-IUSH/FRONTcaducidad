@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import * as movimientoService from '../../services/movimientoService';
-// Se elimina la importación de productoService ya que no es necesaria
-// import * as productoService from '../../services/productoService'; 
 import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import './ListPage.css'; // Reutiliza el CSS de lista
+// 🔑 IMPORTAR EL HOOK DE AUTENTICACIÓN
+import { useAuth } from '../../contexts/AuthContext'; 
 
 const MovimientosListPage = () => {
   const [movimientos, setMovimientos] = useState([]);
-  // Se elimina el estado de productosMap
-  // const [productosMap, setProductosMap] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+    // 🔑 OBTENER EL ESTADO DE AUTENTICACIÓN Y EL ROL
+    const { user } = useAuth();
+    
+    // 💡 LÓGICA DE ADMIN (usando .trim() y .toLowerCase() para seguridad)
+    const userRole = user && user.rol ? user.rol.trim().toLowerCase() : '';
+    const isAdmin = userRole === 'admin';
+    
   useEffect(() => {
     fetchAllData();
   }, []);
 
   const fetchAllData = async () => {
     try {
-        // 1. Se elimina toda la lógica de carga de productos y creación del mapa
-
-        // 2. Cargar movimientos (que ahora ya incluyen nombre_producto y nombre_usuario)
+        // Cargar movimientos
         const movimientosData = await movimientoService.getMovimientos();
         setMovimientos(movimientosData);
     } catch (err) {
@@ -31,17 +34,19 @@ const MovimientosListPage = () => {
     }
   };
 
-  // Se elimina la función auxiliar getProductName
-
   if (loading) return <div className="loading-spinner">Cargando movimientos...</div>;
   if (error) return <div className="error-message-full">Error: {error}</div>;
 
   return (
     <div className="list-container">
       <h2>Historial de Movimientos</h2>
-      <Link to="/movimientos/new">
-        <Button variant="primary">Registrar Nuevo Movimiento</Button>
-      </Link>
+        
+        {/* 🔑 SOLO MOSTRAR EL BOTÓN 'REGISTRAR' SI ES ADMIN */}
+        {isAdmin && (
+            <Link to="/movimientos/new">
+                <Button variant="primary">Registrar Nuevo Movimiento</Button>
+            </Link>
+        )}
 
       {movimientos.length === 0 ? (
         <p>No hay movimientos registrados.</p>
@@ -56,8 +61,8 @@ const MovimientosListPage = () => {
               <p></p>Producto: <strong>{movimiento.nombre_producto}</strong></p>         
               <p><small>ID Producto: {movimiento.id_producto}</small></p>
               <p>Cantidad: {movimiento.cantidad}</p> 
-              
-              {/* MOSTRAR EL NOMBRE DEL USUARIO */}
+              
+              {/* MOSTRAR EL NOMBRE DEL USUARIO */}
               <p>Usuario: <strong>{movimiento.nombre_usuario}</strong></p>
               
               <p>Usuario ID: {movimiento.id_usuario}</p> 
