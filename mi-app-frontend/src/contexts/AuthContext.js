@@ -1,5 +1,6 @@
 // src/contexts/AuthContext.js
-import React, { createContext, useState, useEffect, useContext } from 'react';
+
+import React, { createContext, useState, useEffect, useContext, useCallback } from 'react'; // Importar useCallback
 import * as authService from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,34 +11,41 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+    // 💡 MEJORA: Envolver logout en useCallback para estabilidad
+    const logout = useCallback(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user'); 
+        setUser(null);
+        navigate('/login');
+    }, [navigate]); // navigate es una dependencia estable proporcionada por useNavigate
+
   useEffect(() => {
     const checkUser = async () => {
       const storedToken = localStorage.getItem('token');
-      // CLAVE: Recuperamos el objeto de usuario completo si está guardado
       const storedUser = localStorage.getItem('user');
 
       if (storedToken && storedUser) {
         try {
-            // Parseamos el objeto de usuario JSON
             const userData = JSON.parse(storedUser);
             setUser(userData); 
         } catch (e) {
-            // Manejo de errores si el JSON está corrupto
-            console.error("Error al parsear datos de usuario:", e);
-            logout(); // Forzar el cierre de sesión si hay datos corruptos
+            console.error("Error al parsear datos de usuario, forzando cierre de sesión:", e);
+            // La función logout ahora está definida vía useCallback
+            logout(); 
         }
       }
       setLoading(false);
     };
+    
+    // Asegurarse de que logout sea una dependencia del useEffect si se usa dentro.
     checkUser();
-  }, []);
+  }, [logout]); // 💡 DEPENDENCIA: Asegurar que useEffect sepa de logout
 
   const login = async (credentials) => {
     try {
       const data = await authService.login(credentials);
       localStorage.setItem('token', data.token);
       
-      // CLAVE: Almacenamos el objeto de usuario como un string JSON
       localStorage.setItem('user', JSON.stringify(data.user)); 
       
       setUser(data.user); 
@@ -58,14 +66,6 @@ export const AuthProvider = ({ children }) => {
       console.error('Register error:', error);
       throw error;
     }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    // CLAVE: Eliminamos el objeto de usuario de localStorage
-    localStorage.removeItem('user'); 
-    setUser(null);
-    navigate('/login');
   };
 
   return (
