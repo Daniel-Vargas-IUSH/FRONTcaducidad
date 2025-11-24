@@ -1,37 +1,91 @@
+/* --- VARIABLES DE DISEÑO (Recomendado para manejar colores fácilmente) --- */
+:root {
+    --header-bg: #1A1A1A; /* Negro/Gris oscuro moderno */
+    --accent-color: #00C4CC; /* Azul Turquesa Brillante para la K y CTA */
+    --text-light: #F0F0F0;
+    --shadow-strong: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* --- ESTILOS GENERALES DEL HEADER --- */
 .header {
-  background-color: #333;
-  color: white;
-  padding: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Usamos el color oscuro propuesto */
+    background-color: var(--header-bg);
+    color: var(--text-light); /* Texto principal claro */
+    padding: 1rem 0;
+    /* Sombra más marcada */
+    box-shadow: var(--shadow-strong);
 }
 
+/* Estilo del contenedor para Flexbox y alineación */
 .header .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Empuja el logo a la izquierda y nav a la derecha */
+    align-items: center; /* Centra verticalmente logo y nav */
+    padding: 0 1.5rem; /* Ajuste para más espacio a los lados */
 }
 
-.header .logo {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
+/* --- ESTILOS DEL LOGO (K-DUCANDO con la K verde) --- */
+
+/* ⚠️ REEMPLAZA .header .logo por .logo-link */
+.header .logo-link {
+    display: flex; /* Alinea el SVG y el <span> K-DUCANDO */
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Estilo para la K verde (el SVG) */
+.header .logo-icon {
+    width: 30px; /* Tamaño de la K */
+    height: 30px;
+    margin-right: 8px; /* Espacio entre la K y el texto */
+    /* Nota: El color de la K (#00C4CC) se define DENTRO del código SVG */
+}
+
+/* Estilo para el texto "K-DUCANDO" */
+.header .logo-text {
+    color: var(--text-light);
+    font-size: 1.4rem; /* Ligeramente más grande */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* --- ESTILOS DE NAVEGACIÓN (Enlaces) --- */
+.header .nav {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Usamos 'gap' para manejar el espacio entre elementos fácilmente */
 }
 
 .header .nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 1.5rem;
-  font-size: 1rem;
+    color: var(--text-light);
+    text-decoration: none;
+    /* Eliminamos margin-left: 1.5rem; y usamos gap en .nav */
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.3s ease; /* Transición suave al pasar el ratón */
 }
 
 .header .nav a:hover {
-  text-decoration: underline;
+    color: var(--accent-color); /* Resalta con el color turquesa */
+    text-decoration: none; /* Quitamos el subrayado para un look más limpio */
 }
 
+/* --- ESTILOS DEL BOTÓN (Cerrar Sesión) --- */
 .header .nav button {
-  margin-left: 1.5rem;
+    /* Se usa el color de acento para el botón principal (Cerrar Sesión) */
+    background-color: var(--accent-color);
+    color: var(--header-bg); /* Texto oscuro para el contraste */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Eliminamos margin-left: 1.5rem; y usamos gap en .nav */
+}
+
+.header .nav button:hover {
+    background-color: #00A6B3; /* Un tono ligeramente más oscuro al pasar el ratón */
 }

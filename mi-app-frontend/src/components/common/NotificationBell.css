@@ -1,0 +1,119 @@
+/* src/components/common/NotificationBell.css */
+
+/* --- Variables de alerta --- */
+:root {
+    --accent-color: #00C4CC; /* Turquesa */
+    --text-light: #F0F0F0; 
+    --alert-danger: #dc3545; /* Rojo de peligro */
+    --alert-warning: #ffaa00; /* Naranja de advertencia (similar a ámbar) */
+}
+/* ----------------------------------------------------------------- */
+
+.notification-bell-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.notification-bell-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; 
+    position: relative;
+    padding: 5px;
+    color: var(--text-light); 
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.notification-bell-icon:hover {
+    color: var(--accent-color); 
+}
+
+.notification-bell-icon.has-alerts {
+    /* Color del icono cuando hay alertas (usamos naranja) */
+    color: var(--alert-warning); 
+}
+
+/* Contador de alertas (el punto rojo) */
+.alert-count {
+    position: absolute;
+    top: -5px; 
+    right: -5px; 
+    background-color: var(--alert-danger); /* Rojo para urgencia */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 15px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Menú Desplegable (Styles para el contenedor) */
+.notification-dropdown {
+    position: absolute;
+    top: calc(100% + 5px); 
+    right: 0;
+    width: 320px;
+    max-height: 400px; 
+    overflow-y: auto; 
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000; 
+    padding: 15px;
+    color: #333;
+    border-radius: 8px;
+}
+
+.notification-dropdown h4 {
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid var(--accent-color); 
+    padding-bottom: 8px;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #343a40;
+}
+
+.no-alerts {
+    font-size: 0.9em;
+    color: #28a745; 
+    text-align: center;
+    padding: 10px 0;
+}
+
+.alerts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.alert-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9em;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+}
+
+/* 🛑 ESTILOS DE COLOR PARA ALERTA ROJA (PELIGRO) */
+.alert-item.alert-danger {
+    color: var(--alert-danger); /* ROJO */
+    font-weight: 600;
+}
+
+/* 🟡 ESTILOS DE COLOR PARA ALERTA AMARILLA (ADVERTENCIA) */
+.alert-item.alert-warning {
+    color: #cc9900; /* Marrón oscuro/naranja para legibilidad */
+    font-weight: 500;
+}
