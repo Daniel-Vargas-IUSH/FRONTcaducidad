@@ -1,70 +1,238 @@
+/* src/pages/HomePage.css */
 
+/* --- Variables K-DUCANDO --- */
+:root {
+    --accent-color: #00C4CC; /* Turquesa */
+    --primary-button-color: #007bff; /* Azul primario */
+    --card-bg: white;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --alert-danger: #dc3545; /* Rojo */
+    --alert-warning: #ffaa00; /* Naranja/Amarillo */
+}
+
+
+/* --- Estilos del Contenedor Principal (Para Centrar) --- */
 .home-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px); /* Ajusta a la altura de tu header/footer */
-  background-color: #e9ecef;
-  text-align: center;
-  padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alineación arriba para el dashboard */
+    min-height: calc(100vh - 80px); 
+    background-color: #f4f4f4; /* Fondo gris claro para el dashboard */
+    padding: 30px 20px; /* Padding superior para el dashboard */
+    text-align: center;
 }
 
+/* --- Estilo para Usuario NO logueado (Centrado) --- */
 .home-content {
-  background-color: white;
-  padding: 3rem;
-  border-radius: 8px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  width: 100%;
+    background-color: var(--card-bg);
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin-top: 10vh; /* Ajuste para centrar verticalmente cuando no hay dashboard */
 }
 
-.home-content h1 {
-  color: #333;
-  margin-bottom: 1.5rem;
-  font-size: 2.5rem;
+/* --- Estilo del Contenedor Dashboard (Logueado) --- */
+.dashboard-content {
+    max-width: 1200px;
+    width: 100%;
 }
 
-.home-content p {
-  color: #555;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
+/* --- Estilos Generales de Tarjetas (Cards) --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 20px;
+    text-align: left; /* Contenido interno alineado a la izquierda */
 }
 
+/* Estilo de la Tarjeta de Bienvenida (Top) */
+.welcome-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    border-top: 5px solid var(--accent-color); /* Toque de color */
+}
+
+.welcome-section h2 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+.welcome-section p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* --- KPIs Rápidos (Dentro del Saludo) --- */
+.kpi-quick-summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    gap: 15px;
+}
+
+.kpi-box {
+    text-align: center;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.kpi-box p {
+    margin: 5px 0 2px 0;
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.kpi-box h3 {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+
+/* --- Botones (Estilo Consistente) --- */
 .home-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .home-action-btn {
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo Primario: Azul Relleno */
 .home-action-btn.primary {
-  background-color: #007bff;
-  color: white;
+    background-color: var(--primary-button-color);
+    color: white;
+    border: 1px solid var(--primary-button-color);
 }
 
 .home-action-btn.primary:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
+    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
+/* Estilo Secundario: Azul Contorno (Turquesa en hover) */
 .home-action-btn.secondary {
-  background-color: #6c757d;
-  color: white;
+    background-color: transparent;
+    color: var(--primary-button-color);
+    border: 1px solid var(--primary-button-color);
 }
 
 .home-action-btn.secondary:hover {
-  background-color: #5a6268;
-  transform: translateY(-2px);
+    background-color: rgba(0, 196, 204, 0.1);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+
+/* --- Estructura de Cuadrícula para Widgets --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-grid .full-width {
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+}
+
+/* --- Estilos de Widgets Específicos --- */
+
+/* Widget Stock Bajo */
+.stock-bajo-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #495057;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.stock-bajo-card .big-number {
+    font-size: 3.5em;
+    font-weight: 800;
+    margin: 10px 0 5px 0;
+}
+
+.stock-bajo-card .warning {
+    color: var(--alert-warning);
+}
+
+/* Widget Actividad Reciente */
+.latest-activity-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #495057;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+}
+
+.activity-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95em;
+}
+
+.activity-list li:last-child {
+    border-bottom: none;
+}
+
+.activity-list li.entrada strong {
+    color: #28a745; /* Verde */
+}
+
+.activity-list li.salida strong {
+    color: var(--alert-danger); /* Rojo */
+}
+
+.activity-list li .timestamp {
+    float: right;
+    color: #adb5bd;
+    font-size: 0.8em;
+}
+
+.widget-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.placeholder-content {
+    background-color: #e9ecef;
+    border-radius: 4px;
+    padding: 50px;
+    text-align: center;
+    color: #6c757d;
 }
