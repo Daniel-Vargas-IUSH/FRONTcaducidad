@@ -3,7 +3,7 @@
 /* --- Variables K-DUCANDO --- */
 :root {
     --accent-color: #00C4CC; /* Turquesa */
-    --primary-button-color: #007bff; /* Azul primario */
+    --primary-button-color: #00C4CC; /* Azul primario */
     --card-bg: white;
     --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
     --alert-danger: #dc3545; /* Rojo */
@@ -27,7 +27,7 @@
     background-color: var(--card-bg);
     padding: 3rem;
     border-radius: 8px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px #00C4CC;
     max-width: 800px;
     width: 100%;
     margin-top: 10vh; /* Ajuste para centrar verticalmente cuando no hay dashboard */
@@ -75,7 +75,7 @@
     justify-content: space-around;
     align-items: center;
     margin: 20px 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #00C4CC;
     padding-top: 20px;
     gap: 15px;
 }
@@ -116,7 +116,7 @@
     font-weight: bold;
     font-size: 1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px #00C4CC;
 }
 
 /* Estilo Primario: Azul Relleno */
@@ -134,8 +134,8 @@
 /* Estilo Secundario: Azul Contorno (Turquesa en hover) */
 .home-action-btn.secondary {
     background-color: transparent;
-    color: var(--primary-button-color);
-    border: 1px solid var(--primary-button-color);
+    color: var(--accent-color);;
+    border: 1px solid var(--accent-color);;
 }
 
 .home-action-btn.secondary:hover {

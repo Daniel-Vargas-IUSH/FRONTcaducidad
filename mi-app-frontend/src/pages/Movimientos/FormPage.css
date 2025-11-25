@@ -1,22 +1,26 @@
 /* src/pages/Productos/FormPage.css */
 
+/* --- 1. Estilos del Contenedor Principal del Formulario --- */
 .form-container {
     max-width: 600px;
-    margin: 2rem auto;
+    margin: 2rem auto; /* Centra el formulario */
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* --- 2. Estilo del Título (h2) --- */
 .form-container h2 {
     text-align: center;
-    color: #007bff;
+    /* Color de marca: Cian/Turquesa */
+    color: #00bcd4; 
     margin-bottom: 1.5rem;
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 0.5rem;
 }
 
+/* --- 3. Estilo del Mensaje de Error --- */
 .error-message {
     color: #dc3545;
     background-color: #f8d7da;
@@ -27,8 +31,76 @@
     text-align: center;
 }
 
-/* Espaciado para los botones */
-.form-container button {
-    margin-right: 1rem;
-    margin-top: 1.5rem;
+/* --- 4. Estilos de Campos (Label, Select y Espaciado) --- */
+
+/* Estilo para las etiquetas (labels) */
+.form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
 }
+
+/* Espaciado para cada grupo de Label + Input/Select */
+.form-container > div {
+    margin-bottom: 1rem; 
+}
+
+/* Estilo general para campos de selección (Select) */
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Estilo al enfocar (focus) Select e Input (si usan este estilo) */
+.form-select:focus {
+    /* Color de foco de marca: Cian/Turquesa */
+    border-color: #00bcd4; 
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25);
+}
+
+
+/* --- 5. Estilos de Botones y Acciones --- */
+
+/* Contenedor de botones para alineación horizontal (Flexbox) */
+.form-actions {
+    display: flex; 
+    justify-content: center;
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 2rem; /* Separar del último campo */
+}
+
+/* Ajustes a los botones dentro del contenedor */
+.form-container button {
+    margin-right: 0; 
+    margin-top: 0;
+}
+
+/* Dar ancho para que se vean uniformes */
+.form-actions button {
+    flex-grow: 1;
+    max-width: 200px;
+}
+
+/* Estilos para el botón primario (Registrar Movimiento) */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    /* Color de fondo y borde de marca: Cian/Turquesa */
+    background-color: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+

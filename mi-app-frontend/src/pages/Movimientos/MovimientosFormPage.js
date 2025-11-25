@@ -237,6 +237,7 @@ const MovimientoFormPage = () => {
                 <Button type="submit" variant="primary" disabled={isSubmitting || isEditMode}>
                     {isSubmitting ? 'Procesando...' : (isEditMode ? 'Ver Movimiento' : 'Registrar Movimiento')}
                 </Button>
+            <div className="form-action-secondary"></div>
                 <Button 
                     type="button" 
                     variant="secondary" 
