@@ -1,12 +1,57 @@
 /* src/pages/Productos/FormPage.css */
 
+/* ------------------------------------------------ */
+/* CSS necesario para alinear el ProductoForm */
+/* ------------------------------------------------ */
+/* 5. 🔑 CLAVE PARA CENTRAR Y LIMITAR ANCHO DEL FORMULARIO COMPLETO */
+.producto-form-content { 
+    /* Define un ancho máximo para que no ocupe todo el ancho del modal */
+    max-width: 500px; /* Ajusta este valor (e.g., 400px o 600px) */
+    width: 100%;
+    
+    /* Centra el contenedor horizontalmente dentro de su padre (el modal) */
+    margin-left: auto;
+    margin-right: auto;
+    /* Recomendación: Añade padding para separación visual si es el contenido directo del modal */
+    /* padding: 1.5rem; */
+}
+
+/* 1. Contenedor principal del formulario: fuerce la disposición vertical */
+.producto-form-content form {
+    /* Ocupa el 100% del espacio del modal */
+    width: 100%; 
+    display: flex;
+    flex-direction: column; /* Apila todos los componentes Input verticalmente */
+    gap: 1.25rem; /* Espacio entre los campos/Inputs */
+}
+
+/* 2. Estilo dentro del componente Input: ASEGÚRATE que sus campos internos ocupen el 100% */
+/* Asumiendo que el componente Input usa una clase contenedora llamada .form-group */
+.form-group {
+    /* Si el Input component no fuerza el 100% de ancho, esta regla lo hará */
+    width: 100%; 
+    display: flex;
+    flex-direction: column; /* Esto apila la etiqueta y el input/select */
+}
+
+/* 3. Estilos CLAVE para los inputs internos: ocupan todo el ancho */
+/* (Reemplaza '.form-input' con la clase real que tu Input component aplica al tag <input>) */
+.form-group input,
+.form-group .form-input { 
+    width: 100%; /* <<-- ESTO ALINEA EL CAMPO DE BORDE A BORDE */
+    box-sizing: border-box; /* Fundamental */
+    /* ... otros estilos visuales ... */
+}
+
+/* 4. Estiliza los botones para alinearlos a la derecha */
+.form-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 1.5rem;
+}
 .form-container {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .form-container h2 {

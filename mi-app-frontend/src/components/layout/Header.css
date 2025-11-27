@@ -18,12 +18,12 @@
 
 /* Estilo del contenedor para Flexbox y alineación */
 .header .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between; /* Empuja el logo a la izquierda y nav a la derecha */
     align-items: center; /* Centra verticalmente logo y nav */
-    padding: 0 1.5rem; /* Ajuste para más espacio a los lados */
+    padding: 0 20px; /* Ajuste para más espacio a los lados */
 }
 
 /* --- ESTILOS DEL LOGO (K-DUCANDO con la K verde) --- */

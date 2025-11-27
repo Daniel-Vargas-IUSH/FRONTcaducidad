@@ -1,0 +1,24 @@
+import React from 'react';
+import './Modal.css'; // Crea este archivo en el siguiente paso
+
+const Modal = ({ children, isOpen, onClose, title = 'Ventana Modal' }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h2>{title}</h2>
+                    <button className="modal-close-button" onClick={onClose}>
+                        &times;
+                    </button>
+                </div>
+                <div className="modal-body">
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Modal;

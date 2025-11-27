@@ -23,7 +23,7 @@ body {
 
 .content-area {
   flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible */
-  padding: 1rem;
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -43,7 +43,7 @@ a:hover {
 
 /* Contenedor principal para centrar contenido */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
 }
