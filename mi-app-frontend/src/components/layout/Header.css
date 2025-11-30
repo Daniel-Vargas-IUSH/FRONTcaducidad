@@ -1,7 +1,7 @@
-/* --- VARIABLES DE DISEÑO (Recomendado para manejar colores fácilmente) --- */
+
 :root {
-    --header-bg: #1A1A1A; /* Negro/Gris oscuro moderno */
-    --accent-color: #00C4CC; /* Azul Turquesa Brillante para la K y CTA */
+    --header-bg: #1A1A1A; 
+    --accent-color: #00C4CC; 
     --text-light: #F0F0F0;
     --shadow-strong: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -12,18 +12,24 @@
     background-color: var(--header-bg);
     color: var(--text-light); /* Texto principal claro */
     padding: 1rem 0;
-    /* Sombra más marcada */
     box-shadow: var(--shadow-strong);
+    
+    /* === 🔑 AGREGAMOS ESTOS ESTILOS CLAVE === */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    position: sticky; /* Opcional, pero bueno para la navegación */
+    top: 0;           /* Fija el header a la parte superior */
+    z-index: 1000;    /* Asegura que esté por encima de otros contenidos */
 }
+
 
 /* Estilo del contenedor para Flexbox y alineación */
 .header .container {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* Empuja el logo a la izquierda y nav a la derecha */
-    align-items: center; /* Centra verticalmente logo y nav */
-    padding: 0 20px; /* Ajuste para más espacio a los lados */
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 20px; 
 }
 
 /* --- ESTILOS DEL LOGO (K-DUCANDO con la K verde) --- */
@@ -88,4 +94,45 @@
 
 .header .nav button:hover {
     background-color: #00A6B3; /* Un tono ligeramente más oscuro al pasar el ratón */
+}
+
+/* --- AÑADE ESTE BLOQUE AL FINAL DE TU ARCHIVO Header.css --- */
+
+@media (max-width: 850px) {
+
+    /* 1. Contenedor principal: Permite que los elementos se apilen */
+    .header .container {
+        /* Permite que la navegación se "envuelva" debajo del logo si no hay espacio */
+        flex-wrap: wrap; 
+        /* Reduce el padding lateral para aprovechar mejor el espacio en el móvil */
+        padding: 0 10px; 
+    }
+
+    /* 2. Navegación (.nav): Ocupa el ancho completo y centra el contenido */
+    .header .nav {
+        /* Fuerza a la barra de navegación a ocupar todo el ancho */
+        width: 100%; 
+        /* Centra los enlaces y botones para una mejor estética móvil */
+        justify-content: center;
+        /* Reduce el espacio entre elementos */
+        gap: 10px; 
+        /* Añade espacio vertical para separarlo del logo */
+        padding: 10px 0 5px 0;
+        /* Permite que los enlaces se envuelvan a una segunda línea si son muchos (ej. Log In/Register) */
+        flex-wrap: wrap; 
+    }
+
+    /* 3. Ajuste de tamaño de fuente para que quepan más elementos en la misma línea */
+    .header .nav a,
+    .header .nav button {
+        /* Reducimos el tamaño de fuente para mejor ajuste */
+        font-size: 0.9rem;
+        /* Reducimos el padding del botón */
+        padding: 6px 10px;
+    }
+    
+    /* 4. Logo (Opcional: reduce su tamaño ligeramente) */
+    .header .logo-text {
+        font-size: 1.2rem;
+    }
 }

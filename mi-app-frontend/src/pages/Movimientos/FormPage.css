@@ -1,9 +1,9 @@
-/* src/pages/Productos/FormPage.css */
+
 
 /* --- 1. Estilos del Contenedor Principal del Formulario --- */
 .form-container {
     max-width: 600px;
-    margin: 2rem auto; /* Centra el formulario */
+    margin: 2rem auto; 
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 10px;
@@ -94,7 +94,6 @@
 
 /* Estilos para el botón primario (Registrar Movimiento) */
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-    /* Color de fondo y borde de marca: Cian/Turquesa */
     background-color: #00bcd4 !important;
     border-color: #00bcd4 !important;
     color: #ffffff;

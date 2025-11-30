@@ -1,6 +1,6 @@
 // src/components/common/Button.js
 import React from 'react';
-import './Button.css'; // Crea este archivo CSS
+import './Button.css'; 
 
 const Button = ({ children, onClick, type = 'button', variant = 'primary', ...props }) => {
   return (

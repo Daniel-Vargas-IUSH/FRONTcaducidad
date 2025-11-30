@@ -4,11 +4,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro */
+    background-color: rgba(0, 0, 0, 0.6); 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegúrate de que esté por encima de todo */
+    z-index: 1000; 
 }
 
 .modal-content {
@@ -16,14 +16,14 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    max-width: 600px; /* Ancho típico para formularios */
+    max-width: 600px; 
     width: 90%;
     max-height: 90vh;
-    overflow-y: auto; /* Permite desplazamiento si el contenido es largo */
+    overflow-y: auto; 
 
     display: flex;
-    flex-direction: column; /* Apila el header y el formulario */
-    align-items: center; /* Centra los hijos (incluyendo el .form-container) horizontalmente */
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .modal-header {

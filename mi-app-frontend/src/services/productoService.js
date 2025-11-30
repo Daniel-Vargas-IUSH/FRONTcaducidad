@@ -27,7 +27,6 @@ export const deleteProducto = async (id) => {
   return response.data;
 };
 
-// 🔑 NUEVA FUNCIÓN AÑADIDA: Obtener Alertas de Caducidad
 export const getAlerts = async () => {
     try {
         // Llama a la ruta protegida: GET /api/productos/alertas

@@ -1,6 +1,6 @@
 // src/components/common/InputField.js
 import React from 'react';
-import './InputField.css'; // Crea este archivo CSS
+import './InputField.css'; 
 
 const InputField = ({ label, type = 'text', name, value, onChange, error, ...props }) => {
   return (

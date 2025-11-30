@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as productoService from '../../services/productoService';
-import Input from '../../components/common/InputField'; // Asumiendo que tenés un componente Input
-import Button from '../../components/common/Button'; // Asumiendo que tenés un componente Button
-import './FormPage.css'; // Crea un archivo CSS para los estilos del formulario
-
+import Input from '../../components/common/InputField'; 
+import Button from '../../components/common/Button'; 
+import './FormPage.css'; 
 const ProductoFormPage = () => {
-    // Obtiene el ID de la URL. Será undefined en el modo /productos/new
     const { id_producto } = useParams(); 
     const navigate = useNavigate();
-    const isEditMode = !!id_producto; // Verdadero si hay un ID
+    const isEditMode = !!id_producto; 
     
-    // Estado inicial de los campos (sincronizados con tu DB)
     const [formData, setFormData] = useState({
         nombre: '',
         cantidad: '',
         fecha_caducidad: '',
         ubicacion: '',
-        // 🔑 AÑADIDOS LOS NUEVOS CAMPOS DE PRECIO
         precio_costo: '',
         precio_venta: '',
     });
@@ -69,9 +65,8 @@ const ProductoFormPage = () => {
         const dataToSend = {
             ...formData,
             cantidad: Number(formData.cantidad),
-            precio_costo: Number(formData.precio_costo || 0), // Si es vacío, enviamos 0
-            precio_venta: Number(formData.precio_venta || 0), // Si es vacío, enviamos 0
-            // Convertimos la fecha vacía a null para el backend (si es necesario)
+            precio_costo: Number(formData.precio_costo || 0), 
+            precio_venta: Number(formData.precio_venta || 0), 
             fecha_caducidad: formData.fecha_caducidad || null, 
         };
 
@@ -86,7 +81,6 @@ const ProductoFormPage = () => {
             
             navigate('/productos');
         } catch (err) {
-            // Manejamos el error 400 del controlador si faltan campos
             setError(err.response?.data?.error || `Error al ${isEditMode ? 'actualizar' : 'crear'} el producto.`);
             console.error(err);
             setIsSubmitting(false);

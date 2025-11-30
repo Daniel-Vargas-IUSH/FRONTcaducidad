@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as movimientoService from '../../services/movimientoService';
-// ❌ ELIMINAMOS la importación de 'Link' ya que usaremos un Modal
-// import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
-import './ListPage.css'; // Asumimos que aquí están las clases de centrado
+import './ListPage.css'; 
 import { useAuth } from '../../contexts/AuthContext';
-
-// 🔑 IMPORTACIONES DEL MODAL Y EL FORMULARIO
 import Modal from '../../components/common/Modal'; 
 import MovimientoForm from './MovimientoForm'; 
 
@@ -45,11 +41,10 @@ const MovimientosListPage = () => {
   
   // 🔑 Función llamada por el MovimientoForm al guardar exitosamente
   const handleMovementSuccess = () => {
-    fetchAllData(); // Recarga la lista
-    setIsModalOpen(false); // Cierra el modal
+    fetchAllData(); 
+    setIsModalOpen(false); 
   };
 
-  // Función auxiliar para las clases CSS (para diferenciar visualmente los tipos)
   const getItemClassName = (tipo) => {
     return `list-item-card list-item-${tipo.toLowerCase()}`;
   };
@@ -59,7 +54,6 @@ const MovimientosListPage = () => {
   if (error) return <div className="error-message-full">Error: {error}</div>;
 
   return (
-    // Se ha compactado el código en esta área sensible para eliminar espacios fantasma
     <div className="list-container">
         <h2>Historial de Movimientos</h2>
         {isAdmin && (

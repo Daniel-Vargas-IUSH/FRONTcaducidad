@@ -1,67 +1,25 @@
-/* src/pages/Productos/FormPage.css */
-
-/* ------------------------------------------------ */
-/* CSS necesario para alinear el ProductoForm */
-/* ------------------------------------------------ */
-/* 5. 🔑 CLAVE PARA CENTRAR Y LIMITAR ANCHO DEL FORMULARIO COMPLETO */
-.producto-form-content { 
-    /* Define un ancho máximo para que no ocupe todo el ancho del modal */
-    max-width: 500px; /* Ajusta este valor (e.g., 400px o 600px) */
-    width: 100%;
-    
-    /* Centra el contenedor horizontalmente dentro de su padre (el modal) */
-    margin-left: auto;
-    margin-right: auto;
-    /* Recomendación: Añade padding para separación visual si es el contenido directo del modal */
-    /* padding: 1.5rem; */
-}
-
-/* 1. Contenedor principal del formulario: fuerce la disposición vertical */
-.producto-form-content form {
-    /* Ocupa el 100% del espacio del modal */
-    width: 100%; 
-    display: flex;
-    flex-direction: column; /* Apila todos los componentes Input verticalmente */
-    gap: 1.25rem; /* Espacio entre los campos/Inputs */
-}
-
-/* 2. Estilo dentro del componente Input: ASEGÚRATE que sus campos internos ocupen el 100% */
-/* Asumiendo que el componente Input usa una clase contenedora llamada .form-group */
-.form-group {
-    /* Si el Input component no fuerza el 100% de ancho, esta regla lo hará */
-    width: 100%; 
-    display: flex;
-    flex-direction: column; /* Esto apila la etiqueta y el input/select */
-}
-
-/* 3. Estilos CLAVE para los inputs internos: ocupan todo el ancho */
-/* (Reemplaza '.form-input' con la clase real que tu Input component aplica al tag <input>) */
-.form-group input,
-.form-group .form-input { 
-    width: 100%; /* <<-- ESTO ALINEA EL CAMPO DE BORDE A BORDE */
-    box-sizing: border-box; /* Fundamental */
-    /* ... otros estilos visuales ... */
-}
-
-/* 4. Estiliza los botones para alinearlos a la derecha */
-.form-actions {
-    display: flex;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
-    gap: 1rem; /* Espacio entre los botones */
-    margin-top: 1.5rem;
-}
+/* --- 1. Estilos del Contenedor Principal (Marco y Sombra) --- */
 .form-container {
-    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto; 
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    /* Usa la misma sombra que el formulario de movimiento */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
+/* --- 2. Estilo del Título (h2) --- */
 .form-container h2 {
     text-align: center;
-    color: #007bff;
+    /* Color de marca: Cian/Turquesa (#00bcd4) */
+    color: #00bcd4; 
     margin-bottom: 1.5rem;
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 0.5rem;
 }
 
+/* --- 3. Estilo del Mensaje de Error --- */
 .error-message {
     color: #dc3545;
     background-color: #f8d7da;
@@ -72,8 +30,84 @@
     text-align: center;
 }
 
-/* Espaciado para los botones */
-.form-container button {
-    margin-right: 1rem;
-    margin-top: 1.5rem;
+/* --- 4. Estilos de Campos (Label, Input, Select, y Espaciado) --- */
+
+/* Estilo para las etiquetas (labels) */
+.form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Espaciado para cada grupo de Label + Input/Select */
+.form-container > div {
+    margin-bottom: 1rem; 
+}
+
+/* Estilo general para campos de SELECCIÓN e INPUT (Texto, Número, Fecha) */
+.form-select,
+.form-input { /* <-- AGREGAMOS .form-input AQUÍ */
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+}
+
+/* Estilo al enfocar (focus) Select e Input */
+.form-select:focus,
+.form-input:focus { /* <-- AGREGAMOS .form-input:focus AQUÍ */
+    /* Color de foco de marca: Cian/Turquesa */
+    border-color: #00bcd4; 
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25);
+}
+
+
+/* --- 5. Estilos de Botones y Acciones --- */
+
+/* Contenedor de botones para alineación horizontal (Flexbox) */
+.form-actions {
+    display: flex; 
+    justify-content: center; /* Alineación central igual que en el de movimiento */
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 2rem; 
+}
+
+/* Dar ancho para que se vean uniformes */
+.form-actions button {
+    flex-grow: 1;
+    max-width: 200px;
+    padding: 10px 20px;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    border: none;
+}
+
+/* Estilos para el botón primario (Registrar / Crear Producto) */
+.btn-primary {
+    background-color: #00bcd4;
+    color: #ffffff;
+}
+.btn-primary:hover {
+    background-color: #0097a7; /* Tono más oscuro */
+}
+
+/* Estilos para el botón secundario (Cancelar) - Similar al botón gris del modal */
+.btn-secondary {
+    background-color: #6c757d; /* Gris */
+    color: #ffffff;
+}
+.btn-secondary:hover {
+    background-color: #5a6268; /* Tono más oscuro */
 }

@@ -22,7 +22,7 @@ body {
 }
 
 .content-area {
-  flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible */
+  flex-grow: 1; 
   padding: 0;
 }
 
@@ -41,7 +41,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Contenedor principal para centrar contenido */
 .container {
   max-width: 1400px;
   margin: 0 auto;

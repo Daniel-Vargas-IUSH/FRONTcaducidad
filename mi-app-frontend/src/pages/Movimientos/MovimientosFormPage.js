@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as movimientoService from '../../services/movimientoService';
-import * as productoService from '../../services/productoService'; // Necesario para actualizar el stock
+import * as productoService from '../../services/productoService'; 
 import Input from '../../components/common/InputField';
 import Button from '../../components/common/Button';
-// Se importa el hook real
 import { useAuth } from '../../contexts/AuthContext'; 
 import './FormPage.css'; 
 
@@ -24,8 +23,6 @@ const MovimientoFormPage = () => {
     const { id_movimiento } = useParams(); 
     const navigate = useNavigate();
     const isEditMode = !!id_movimiento; 
-    
-    // CORRECCIÓN: Usamos el hook useAuth y renombramos loading a authLoading
     const { user, loading: authLoading } = useAuth();
     // CLAVE: Accedemos al id_usuario desde el objeto 'user'
     const currentUserId = user?.id_usuario; 
@@ -110,7 +107,6 @@ const MovimientoFormPage = () => {
             return;
         }
 
-        // El campo de stock en la tabla de productos se llama 'cantidad' en tu modelo
         const stockActual = Number(productoActual.cantidad); 
         let nuevoStock;
 
@@ -143,7 +139,7 @@ const MovimientoFormPage = () => {
         // Payload para la actualización del stock del producto
         const productoUpdatePayload = {
             ...restOfProductData, 
-            cantidad: nuevoStock, // <-- ¡El stock actualizado!
+            cantidad: nuevoStock, 
             // *** CLAVE DE CORRECCIÓN AQUÍ ***
             fecha_caducidad: formatDateToSQL(productoActual.fecha_caducidad),
         };
@@ -172,10 +168,8 @@ const MovimientoFormPage = () => {
         }
     };
 
-    // CORRECCIÓN: Esperamos a que la autenticación y la carga de productos terminen
     if (loading || authLoading) return <div>Cargando formulario de movimiento...</div>;
     
-    // Si la autenticación terminó (authLoading es false) y no tenemos ID, mostramos el error
     if (!currentUserId) return <div className="error-message">Error: Debe iniciar sesión para registrar movimientos.</div>;
 
     return (

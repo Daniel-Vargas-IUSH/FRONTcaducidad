@@ -1,5 +1,5 @@
 import React from 'react';
-import './Modal.css'; // Crea este archivo en el siguiente paso
+import './Modal.css'; 
 
 const Modal = ({ children, isOpen, onClose, title = 'Ventana Modal' }) => {
     if (!isOpen) return null;

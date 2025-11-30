@@ -1,7 +1,7 @@
 // src/pages/NotFoundPage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NotFoundPage.css'; // Crea este CSS
+import './NotFoundPage.css'; 
 
 const NotFoundPage = () => {
   return (

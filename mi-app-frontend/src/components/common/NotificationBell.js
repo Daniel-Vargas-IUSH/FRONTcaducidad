@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MdNotifications } from 'react-icons/md'; // Asegúrate de tener instalado react-icons
+import { MdNotifications } from 'react-icons/md'; 
 import * as productoService from '../../services/productoService.js';
 import './NotificationBell.css'; 
 
@@ -8,13 +8,12 @@ const NotificationBell = () => {
     const [isOpen, setIsOpen] = useState(false);
     const bellRef = useRef(null);
 
-    // Función para cargar las alertas
     const fetchAlerts = async () => {
         try {
             const data = await productoService.getAlerts();
 
             if (data && typeof data === 'object') {
-                // Combinamos las listas de alertas rojas y amarillas
+
                 const roja = (data.alerta_roja || []).map(a => ({ ...a, tipo: 'alerta_roja' }));
                 const amarilla = (data.alerta_amarilla || []).map(a => ({ ...a, tipo: 'alerta_amarilla' }));
                 
@@ -32,14 +31,13 @@ const NotificationBell = () => {
         }
     };
 
-    // 1. Carga inicial y recarga periódica
     useEffect(() => {
         fetchAlerts();
         const intervalId = setInterval(fetchAlerts, 300000); 
         return () => clearInterval(intervalId);
     }, []);
 
-    // 2. Manejar clic fuera del menú para cerrarlo
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (bellRef.current && !bellRef.current.contains(event.target)) {
@@ -53,14 +51,12 @@ const NotificationBell = () => {
         };
     }, [bellRef]);
     
-    // Función de formato auxiliar
     const formatDate = (dateString) => {
         if (!dateString) return 'N/A';
         const cleanedDateString = dateString.split('T')[0];
         return new Date(cleanedDateString + 'T00:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
     };
 
-    // Función para calcular los días restantes
     const calculateDaysRemaining = (dateString) => {
         if (!dateString) return null;
         const cleanedDateString = dateString.split('T')[0];
@@ -99,28 +95,24 @@ const NotificationBell = () => {
                             {alerts.map((alert, index) => {
                                 const daysRemaining = calculateDaysRemaining(alert.fecha_caducidad);
                                 
-                                // 🟢 LÓGICA DE CLASIFICACIÓN CORREGIDA POR DÍAS
-                                let alertTypeClass = 'alert-warning'; // 8 a 30 días (Amarillo por defecto)
+                                
+                                let alertTypeClass = 'alert-warning'; 
                                 let alertEmoji = '🟡';
                                 
                                 if (daysRemaining !== null) {
                                     
-                                    // 1. CONDICIÓN DE PELIGRO: 7 DÍAS O MENOS
                                     if (daysRemaining <= 7) { 
                                         alertTypeClass = 'alert-danger'; 
                                         alertEmoji = '🔴';
                                     } 
                                     
-                                    // 2. CONDICIÓN DE EXPIRADO: ¡SOBRESCRIBE! 0 DÍAS O MENOS
                                     if (daysRemaining <= 0) {
                                          alertTypeClass = 'alert-danger'; 
                                          alertEmoji = '💀'; // 💀 CALAVERA
                                     } 
                                     
-                                    // Si cae entre 8 y 30 días, mantiene los valores iniciales 'alert-warning' y '🟡'.
                                 }
                                 
-                                // FIN DE LA LÓGICA 🔴🟡💀
 
                                 return (
                                     <li key={alert.id_producto || index} className={`alert-item ${alertTypeClass}`}>

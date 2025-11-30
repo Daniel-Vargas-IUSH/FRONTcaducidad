@@ -8,7 +8,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import './FormPage.css'; 
 
 
-// 🔑 FUNCIÓN AUXILIAR: Añadida para resolver el error 'formatDateToSQL is not defined'
 const formatDateToSQL = (isoDateString) => {
     if (!isoDateString || typeof isoDateString !== 'string') return null;
     try {
@@ -23,8 +22,7 @@ const formatDateToSQL = (isoDateString) => {
 
 // 🔑 NUEVAS PROPS: Recibir onClose (cerrar modal) y onSuccess (refrescar lista)
 const MovimientoForm = ({ onClose, onSuccess }) => {
-    // 🔑 ELIMINAR/IGNORAR: Se eliminó el uso de useParams y useNavigate
-    const isEditMode = false; // El modal es SÓLO para CREAR (Registro)
+    const isEditMode = false; 
     
     const { user, loading: authLoading } = useAuth();
     const currentUserId = user?.id_usuario; 
@@ -47,8 +45,6 @@ const MovimientoForm = ({ onClose, onSuccess }) => {
             try {
                 const prodsData = await productoService.getProductos();
                 setProductos(prodsData);
-                
-                // 🔑 ELIMINADA LÓGICA DE CARGA PARA EDICIÓN
                 
             } catch (err) {
                 setError(err.message || 'Error al cargar datos necesarios (productos).');
@@ -83,7 +79,6 @@ const MovimientoForm = ({ onClose, onSuccess }) => {
             setIsSubmitting(false);
             return;
         }
-        // 🔑 RESTRICCIÓN DE EDICIÓN ELIMINADA (ya que isEditMode es false)
 
         const cantidadMovimiento = Number(formData.cantidad);
         const productoId = Number(formData.id_producto);
@@ -129,7 +124,6 @@ const MovimientoForm = ({ onClose, onSuccess }) => {
         const productoUpdatePayload = {
             ...restOfProductData, 
             cantidad: nuevoStock,
-            // 🔑 USO DE LA FUNCIÓN CORREGIDA
             fecha_caducidad: formatDateToSQL(productoActual.fecha_caducidad),
         };
 
@@ -141,9 +135,9 @@ const MovimientoForm = ({ onClose, onSuccess }) => {
 
             alert(`Movimiento de ${tipoMovimiento} registrado con éxito. Stock actualizado a ${nuevoStock}.`);
             
-            // 🔑 CAMBIO: Cerrar el modal y notificar éxito
-            if (onSuccess) onSuccess(); // Notifica al componente padre para refrescar la lista
-            if (onClose) onClose();     // Cierra el modal
+            
+            if (onSuccess) onSuccess(); 
+            if (onClose) onClose();     
 
         } catch (err) {
             console.error("Error en el submit:", err);
@@ -162,7 +156,7 @@ const MovimientoForm = ({ onClose, onSuccess }) => {
     if (!currentUserId) return <div className="error-message">Error: Debe iniciar sesión para registrar movimientos.</div>;
 
     return (
-        // 🔑 CAMBIO CLAVE: Usamos 'form-container' para aplicar el centrado y estilo CSS
+        
         <div className="form-container"> 
             
             <form onSubmit={handleSubmit}>

@@ -4,12 +4,9 @@ import * as productoService from '../../services/productoService';
 import Input from '../../components/common/InputField';
 import Button from '../../components/common/Button';
 import './FormPage.css';
-// 🔑 NUEVAS PROPS: Recibe data de producto (para edición) y funciones de control (para modal)
 const ProductoForm = ({ id_producto, onSuccess, onClose }) => {
-    // Determina si estamos en modo Edición (si se pasa un id_producto como prop)
     const isEditMode = !!id_producto; 
     
-    // Estado inicial de los campos (sincronizados con tu DB)
     const [formData, setFormData] = useState({
         nombre: '',
         cantidad: '',
@@ -22,10 +19,8 @@ const ProductoForm = ({ id_producto, onSuccess, onClose }) => {
     const [error, setError] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // Función auxiliar para formatear a YYYY-MM-DD
     const formatDateForInput = (dateString) => {
         if (!dateString) return '';
-        // Asume que la fecha viene como ISO String (ej. 2025-11-26T05:00:00.000Z)
         return dateString.split('T')[0];
     };
 
@@ -89,9 +84,7 @@ const ProductoForm = ({ id_producto, onSuccess, onClose }) => {
                 alert('Producto creado con éxito!');
             }
             
-            // 🔑 CAMBIO: Llamar a onSuccess para notificar a la lista
             if(onSuccess) onSuccess();
-            // 🔑 CAMBIO: Llamar a onClose para cerrar el Modal (si aplica)
             if(onClose) onClose();
             
         } catch (err) {
@@ -104,90 +97,121 @@ const ProductoForm = ({ id_producto, onSuccess, onClose }) => {
 
     if (loading) return <div className="loading-message">Cargando datos del producto...</div>;
 
-    return (
-        <div className="producto-form-content"> {/* Cambié la clase para diferenciar */}
-            
-            <form onSubmit={handleSubmit}>
-                {error && <p className="error-message">{error}</p>}
-                
-                {/* Campo Nombre */}
-                <Input 
-                    label="Nombre"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    required
-                />
+    return (
+        // 🎯 CAMBIO 1: Usamos la clase CSS principal 'form-container'
+        // El contenido del formulario va DENTRO del .form-container
+        <div className="form-container"> 
+            
+            {/* 🎯 TÍTULO: Aseguramos el h2 para aplicar el estilo unificado */}
+            
 
-                {/* Campo Cantidad (Stock) - Bloqueado en Edición */}
-                <Input 
-                    label="Cantidad (Stock)"
-                    name="cantidad"
-                    type="number"
-                    value={formData.cantidad}
-                    onChange={handleChange}
-                    required
-                    disabled={isEditMode} 
-                    readOnly={isEditMode} 
-                    className={isEditMode ? 'form-input form-input-readonly' : ''} 
-                />
+            <form onSubmit={handleSubmit}>
+                {error && <p className="error-message">{error}</p>}
+                
+                {/* 🎯 CAMBIO 2: Envolvemos cada Input en un div para el espaciado de 1rem */}
+                <div> 
+                    {/* Campo Nombre */}
+                    <Input 
+                        label="Nombre"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        required
+                        // 🎯 CAMBIO 3: Aseguramos que el componente Input agregue la clase 'form-input'
+                        // (Si tu componente Input no maneja esto internamente, revisa su código)
+                        className="form-input" 
+                    />
+                </div>
 
-                {/* 💰 Campo Precio de Costo */}
-                <Input 
-                    label="Precio de Costo ($)"
-                    name="precio_costo"
-                    type="number"
-                    step="0.01" 
-                    value={formData.precio_costo}
-                    onChange={handleChange}
-                    required
-                />
+                <div>
+                    {/* Campo Cantidad (Stock) - Bloqueado en Edición */}
+                    <Input 
+                        label="Cantidad (Stock)"
+                        name="cantidad"
+                        type="number"
+                        value={formData.cantidad}
+                        onChange={handleChange}
+                        required
+                        disabled={isEditMode} 
+                        readOnly={isEditMode} 
+                        // 🎯 CAMBIO 3: Aseguramos la clase 'form-input'
+                        className={`form-input ${isEditMode ? 'form-input-readonly' : ''}`} 
+                    />
+                </div>
 
-                {/* 🏷️ Campo Precio de Venta */}
-                <Input 
-                    label="Precio de Venta ($)"
-                    name="precio_venta"
-                    type="number"
-                    step="0.01" 
-                    value={formData.precio_venta}
-                    onChange={handleChange}
-                    required
-                />
-                
-                {/* Campo Fecha de Caducidad */}
-                <Input 
-                    label="Fecha de Caducidad"
-                    name="fecha_caducidad"
-                    type="date"
-                    value={formData.fecha_caducidad}
-                    onChange={handleChange}
-                />
-                
-                {/* Campo Ubicación */}
-                <Input 
-                    label="Ubicación"
-                    name="ubicacion"
-                    value={formData.ubicacion}
-                    onChange={handleChange}
-                    required
-                />
+                <div>
+                    {/* 💰 Campo Precio de Costo */}
+                    <Input 
+                        label="Precio de Costo ($)"
+                        name="precio_costo"
+                        type="number"
+                        step="0.01" 
+                        value={formData.precio_costo}
+                        onChange={handleChange}
+                        required
+                        // 🎯 CAMBIO 3: Aseguramos la clase 'form-input'
+                        className="form-input"
+                    />
+                </div>
 
-                {/* Botones */}
-                <div className="form-actions">
-                    <Button type="submit" variant="primary" disabled={isSubmitting}>
-                        {isSubmitting ? 'Guardando...' : (isEditMode ? 'Guardar Cambios' : 'Crear Producto')}
-                    </Button>
-                    <Button 
-                        type="button" 
-                        variant="secondary" 
-                        onClick={onClose} // 🔑 CAMBIO: Ahora llama a onClose
-                    >
-                        Cancelar
-                    </Button>
-                </div>
-            </form>
-        </div>
-    );
+                <div>
+                    {/* 🏷️ Campo Precio de Venta */}
+                    <Input 
+                        label="Precio de Venta ($)"
+                        name="precio_venta"
+                        type="number"
+                        step="0.01" 
+                        value={formData.precio_venta}
+                        onChange={handleChange}
+                        required
+                        // 🎯 CAMBIO 3: Aseguramos la clase 'form-input'
+                        className="form-input"
+                    />
+                </div>
+                
+                <div>
+                    {/* Campo Fecha de Caducidad */}
+                    <Input 
+                        label="Fecha de Caducidad"
+                        name="fecha_caducidad"
+                        type="date"
+                        value={formData.fecha_caducidad}
+                        onChange={handleChange}
+                        // 🎯 CAMBIO 3: Aseguramos la clase 'form-input'
+                        className="form-input"
+                    />
+                </div>
+                
+                <div>
+                    {/* Campo Ubicación */}
+                    <Input 
+                        label="Ubicación"
+                        name="ubicacion"
+                        value={formData.ubicacion}
+                        onChange={handleChange}
+                        required
+                        // 🎯 CAMBIO 3: Aseguramos la clase 'form-input'
+                        className="form-input"
+                    />
+                </div>
+
+                {/* Botones */}
+                <div className="form-actions">
+                    {/* 🎯 CAMBIO 4: Usamos variant="primary" y variant="secondary" para los estilos unificados */}
+                    <Button type="submit" variant="primary" disabled={isSubmitting}>
+                        {isSubmitting ? 'Guardando...' : (isEditMode ? 'Guardar Cambios' : 'Crear Producto')}
+                    </Button>
+                    <Button 
+                        type="button" 
+                        variant="secondary" 
+                        onClick={onClose} 
+                    >
+                        Cancelar
+                    </Button>
+                </div>
+            </form>
+        </div>
+    );
 };
 
 export default ProductoForm;

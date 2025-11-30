@@ -1,7 +1,7 @@
 // src/pages/HomePage.js
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import './HomePage.css'; // Crea un archivo CSS para estilos de home
+import './HomePage.css'; 
 
 const HomePage = () => {
   const { user } = useAuth();

@@ -1,44 +1,21 @@
-/* ------------------------------------------- */
-/* --- 1. ESTILOS DEL CONTENEDOR PRINCIPAL --- */
-/* ------------------------------------------- */
 
 .list-container {
-    /* 🔑 Esencial: Asegura que el contenedor ocupe todo el ancho disponible */
     width: 100%; 
-    
-    /* Opcional: Define un ancho máximo para pantallas muy grandes */
-   max-width: 1280px;
-    
-    /* Centra el contenedor si hay un ancho máximo */
+    max-width: 1280px;
     margin: 0 auto; 
-    
-    /* 🔑 Añade padding horizontal para evitar que el contenido toque los bordes de la ventana */
     padding: 0 20px; 
-    
-    /* Esencial: Asegura que padding y border estén incluidos en el width */
     box-sizing: border-box; 
 }
 
-/* ------------------------------------------- */
-/* --- 2. CONFIGURACIÓN DE GRILLA (GRID) Y RESPONSIVIDAD --- */
-/* ------------------------------------------- */
-
-/* Contenedor principal de la lista (UL) */
 .list-items {
     display: grid;
-    /* Define 3 columnas de ancho igual (1fr) por defecto (Desktop) */
     grid-template-columns: repeat(3, 1fr); 
-    /* Espacio entre las tarjetas */
     gap: 20px; 
-    
-    /* 🔑 CLAVE: Centra el conjunto de tarjetas si no llena las 3 columnas */
-    justify-content: center; /* ¡Añadir esta línea! */
-    
+    justify-content: center; 
     list-style: none; 
     padding: 0;
     margin: 20px 0;
 }
-
 
 /* RESPONSIVIDAD: Para Tablets (máx. 1024px) */
 @media (max-width: 1024px) {
@@ -58,12 +35,8 @@
     }
 }
 
-/* ------------------------------------------- */
-/* --- 3. MEJORAS ESTÉTICAS GENERALES DE LA TARJETA --- */
-/* ------------------------------------------- */
 
 .list-item-card {
-    /* 🔑 Limpieza forzada: Asegúrate de que no haya espacios extra o caracteres invisibles */
     background-color: #ffffff;
     border: 1px solid #e0e0e0; 
     

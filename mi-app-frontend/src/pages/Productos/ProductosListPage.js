@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as productoService from '../../services/productoService';
-//import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import './ListPage.css'; 
-
 import { useAuth } from '../../contexts/AuthContext'; 
-
-// 🔑 IMPORTACIONES NECESARIAS PARA EL MODAL Y EL FORMULARIO
-import Modal from '../../components/common/Modal'; // Asume que esta ruta es correcta
-import ProductoForm from './ProductoForm'; // Esta ruta ya está corregida y funciona
+import Modal from '../../components/common/Modal'; 
+import ProductoForm from './ProductoForm'; 
 
 // --- FUNCIÓN DE UTILIDAD: FORMATEO DE FECHAS ---
 const formatDate = (dateString) => {
@@ -47,30 +43,22 @@ const formatCurrency = (value) => {
     // Usamos Intl.NumberFormat para un formato de moneda local
     return new Intl.NumberFormat('es-CO', {
         style: 'currency',
-        currency: 'COP', // O la moneda que uses (USD, EUR, etc.)
+        currency: 'COP', 
         minimumFractionDigits: 2,
     }).format(value);
 };
-
-// -------------------------------------------------------------------
 
 const ProductosListPage = () => {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // 🔑 Estado para controlar la visibilidad del Modal de CREACIÓN
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); 
-    // 🔑 Estado para controlar si estamos editando un producto específico
     const [editProductId, setEditProductId] = useState(null);
-
-    // OBTENER EL ESTADO DE AUTENTICACIÓN Y EL ROL
     const { user } = useAuth(); 
     
     // Convertir a minúsculas para comparar ('Admin' vs 'admin')
     const userRole = user && user.rol ? user.rol.toLowerCase() : '';
     const isAdmin = userRole === 'admin'; 
-    
-    // Determina si el modal está abierto para CREAR o EDITAR
     const isModalOpen = isCreateModalOpen || (editProductId !== null);
     
     useEffect(() => {
@@ -98,19 +86,16 @@ const ProductosListPage = () => {
         }
     };
     
-    // 🔑 Función llamada al CREAR o EDITAR un producto con éxito
     const handleProductSuccess = () => {
-        fetchProductos(); // Recarga la lista
-        handleCloseModal(); // Cierra el modal
+        fetchProductos(); 
+        handleCloseModal(); 
     };
     
-    // 🔑 Función para cerrar el modal (tanto de Creación como de Edición)
     const handleCloseModal = () => {
         setIsCreateModalOpen(false);
-        setEditProductId(null); // Limpiar el ID de edición
+        setEditProductId(null); 
     };
 
-    // 🔑 Función para abrir el modal en modo EDICIÓN
     const handleOpenEditModal = (id) => {
         setEditProductId(id);
     };
@@ -124,7 +109,7 @@ const ProductosListPage = () => {
         if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
             try {
                 await productoService.deleteProducto(id);
-                fetchProductos(); // Refresca la lista
+                fetchProductos(); 
             } catch (err) {
                 setError(err.response?.data?.error || 'Error al eliminar producto');
             }

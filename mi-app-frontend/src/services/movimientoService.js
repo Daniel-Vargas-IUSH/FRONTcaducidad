@@ -4,10 +4,6 @@ import api from './api';
 
 export const getMovimientos = async () => {
   const response = await api.get('/movimientos');
-  
-  // 🏆 CORRECCIÓN: Devolver response.data.data
-  // Tu controlador Express devuelve: { mensaje: "...", data: [...] }
-  // Necesitamos acceder a la propiedad 'data' que contiene el array.
   return response.data.data; 
 };
 
